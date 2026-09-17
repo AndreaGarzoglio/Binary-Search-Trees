@@ -154,7 +154,7 @@
       __unused_webpack_exports,
       __webpack_require__,
     ) {
-      module.exports = __webpack_require__.p + "a0d3a74a275ac4304d0c.png";
+      module.exports = __webpack_require__.p + "810da7f1712c30c40e0f.png";
 
       /***/
     },
@@ -167,7 +167,7 @@
       __unused_webpack_exports,
       __webpack_require__,
     ) {
-      module.exports = __webpack_require__.p + "d4e4cf1c9b011c2ac1de.png";
+      module.exports = __webpack_require__.p + "fa7e334fa19ddbcdd480.png";
 
       /***/
     },
