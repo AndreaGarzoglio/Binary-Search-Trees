@@ -30,8 +30,8 @@ plus a `.husky/pre-commit` hook that runs `prettier` on staged files.
 ## The classes
 
 Each `Node` holds a `data` value and pointers to a `left` and `right`
-child. The BST invariant — everything in a node's left subtree is
-smaller, everything in its right subtree is bigger — is what makes
+child. The BST invariant (everything in a node's left subtree is
+smaller, everything in its right subtree is bigger) is what makes
 lookup, insert and delete all run in O(height) instead of O(n).
 
 - `buildTree(array)`: dedupes and sorts the array, then recursively picks
