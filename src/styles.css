@@ -1,0 +1,656 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #0d0d10;
+  --surface: #131316;
+  --surface-alt: #1a1a1f;
+  --line: #2b2b32;
+  --ink: #e7e7ec;
+  --ink-dim: #83838f;
+  --violet: #9b6bff;
+  --violet-soft: rgba(155, 107, 255, 0.12);
+  --magenta: #e879f9;
+  --danger: #ff6161;
+  --danger-soft: rgba(255, 97, 97, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  background:
+    radial-gradient(
+      700px 560px at 10% -5%,
+      rgba(155, 107, 255, 0.2),
+      transparent 60%
+    ),
+    radial-gradient(
+      600px 500px at 100% 100%,
+      rgba(232, 121, 249, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(rgba(155, 107, 255, 0.16) 1px, transparent 1px), var(--bg);
+  background-size:
+    100% 100%,
+    100% 100%,
+    22px 22px;
+  color: var(--ink);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--violet-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 1px solid var(--violet);
+  outline-offset: 2px;
+}
+
+/* ── Terminal window ── */
+.terminal {
+  width: 100%;
+  max-width: 760px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(19, 19, 22, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.titlebar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(26, 26, 31, 0.5);
+  border-bottom: 1px solid var(--line);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #37373f;
+}
+
+.path {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 28px 20px;
+}
+
+.prompt {
+  color: var(--violet);
+}
+
+/* ── Intro ── */
+.intro {
+  flex-shrink: 0;
+  margin-bottom: 22px;
+}
+
+.intro .line {
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin-bottom: 14px;
+}
+
+.intro .line .prompt {
+  margin-right: 6px;
+}
+
+.intro-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.desc {
+  color: var(--ink-dim);
+  font-size: 13.5px;
+  line-height: 1.75;
+  max-width: 480px;
+}
+
+.how-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.how-btn:hover {
+  color: var(--violet);
+  border-color: var(--violet);
+}
+
+/* ── "how it works" modal ── */
+.how-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  width: min(640px, 92vw);
+  max-height: 80vh;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(19, 19, 22, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--ink);
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(155, 107, 255, 0.08);
+}
+
+.how-modal::backdrop {
+  background: rgba(5, 5, 7, 0.7);
+}
+
+.how-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(26, 26, 31, 0.5);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--violet);
+}
+
+.how-modal-close {
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.how-modal-close:hover {
+  color: var(--danger);
+}
+
+.how-modal-code {
+  margin: 0;
+  padding: 18px 20px;
+  overflow: auto;
+  max-height: calc(80vh - 51px);
+  background: rgba(13, 13, 16, 0.4);
+  font-family: inherit;
+  font-size: 12.5px;
+  line-height: 1.65;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.code-line.comment {
+  color: var(--ink-dim);
+}
+
+/* ── Tree diagram ── */
+.tree-wrap {
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(13, 13, 16, 0.4);
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.tree-view {
+  min-height: 160px;
+  max-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+}
+
+.tree-view:empty::before,
+.tree-view .tree-empty {
+  content: "null";
+  color: #4c4c56;
+  font-size: 13px;
+}
+
+.tree-view svg {
+  display: block;
+  max-width: none;
+}
+
+.tree-edge {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.tree-node circle {
+  fill: var(--surface-alt);
+  stroke: var(--violet);
+  stroke-width: 1.5;
+}
+
+.tree-node.root circle {
+  stroke: var(--magenta);
+}
+
+.tree-node text {
+  fill: var(--ink);
+  font-family: inherit;
+  font-size: 12px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.rule {
+  flex-shrink: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 20px 0;
+}
+
+/* ── Panes (split like tmux) ── */
+.panes {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 22px;
+}
+
+.pane-divider {
+  background: var(--line);
+}
+
+.pane-label {
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin-bottom: 6px;
+}
+
+.pane-label::before {
+  content: "# ";
+  color: #4a4a55;
+}
+
+/* ── Command rows ── */
+.cmd-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.cmd-row:first-of-type {
+  border-top: none;
+}
+
+.cmd-row label {
+  flex: 0 0 96px;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.cmd-row .fields {
+  flex: 1;
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input.narrow {
+  max-width: 64px;
+  flex: 0 0 64px;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: #4c4c56;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: var(--violet);
+}
+
+input.invalid {
+  border-color: var(--danger);
+  animation: shake 0.25s;
+}
+
+@keyframes shake {
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+/* remove number spinners for a cleaner terminal feel */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: textfield;
+}
+
+button.run {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--violet);
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 2px;
+}
+
+button.run::before {
+  content: "[ ";
+  color: #4a4a55;
+}
+
+button.run::after {
+  content: " ]";
+  color: #4a4a55;
+}
+
+button.run:hover {
+  color: #b892ff;
+}
+
+button.run:active {
+  opacity: 0.7;
+}
+
+button.run.danger {
+  color: var(--danger);
+}
+
+button.run.danger:hover {
+  color: #ff8a8a;
+}
+
+/* ── Terminal cursor ── */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  margin-left: 2px;
+  background: var(--violet);
+  vertical-align: -2px;
+  animation: cursor-blink 1s steps(1) infinite;
+}
+
+.log-line.error .cursor {
+  background: var(--danger);
+}
+
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ── Log (terminal scrollback): one scrolling row, newest on the left ── */
+.log {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.log:empty::before {
+  content: "waiting for input…";
+  color: #4c4c56;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.log-line {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  background: var(--surface-alt);
+  border-left: 2px solid var(--violet);
+  border-radius: 0 4px 4px 0;
+  padding: 7px 12px;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.log-line::before {
+  content: "$ ";
+  color: var(--ink-dim);
+}
+
+.log-line.error {
+  border-left-color: var(--danger);
+  color: var(--danger);
+}
+
+.log-line.error::before {
+  content: "! ";
+  color: var(--danger);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  .body {
+    padding: 18px 18px 16px;
+  }
+
+  .intro {
+    margin-bottom: 16px;
+  }
+
+  .rule {
+    margin: 14px 0;
+  }
+
+  .panes {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .pane-divider {
+    display: none;
+  }
+
+  .pane + .pane {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .cmd-row {
+    flex-wrap: wrap;
+  }
+
+  .cmd-row .fields {
+    flex: 1 1 100%;
+    order: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
+/* ── Large screens: the card stays comfortably readable instead of
+   floating tiny in the middle of the page ── */
+@media (min-width: 1100px) {
+  .terminal {
+    max-width: 1000px;
+  }
+
+  .path,
+  .intro .line {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .desc {
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  .how-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .how-modal {
+    width: min(760px, 92vw);
+  }
+
+  .how-modal-header {
+    font-size: 14px;
+  }
+
+  .how-modal-code {
+    font-size: 14px;
+  }
+
+  .tree-view {
+    min-height: 200px;
+    max-height: 360px;
+    padding: 20px;
+  }
+
+  .tree-node text {
+    font-size: 13px;
+  }
+
+  .pane-label {
+    font-size: 14px;
+  }
+
+  .cmd-row label {
+    flex-basis: 112px;
+    font-size: 15px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    font-size: 15px;
+    padding: 8px 10px;
+  }
+
+  input.narrow {
+    max-width: 80px;
+    flex-basis: 80px;
+  }
+
+  button.run {
+    font-size: 15px;
+  }
+
+  .log:empty::before {
+    font-size: 14px;
+  }
+
+  .log-line {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
