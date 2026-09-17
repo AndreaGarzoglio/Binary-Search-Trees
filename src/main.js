@@ -147,9 +147,7 @@ function typeWriter(el, text, { speed = 22, onTick } = {}) {
   clearInterval(typingTimers.get(el));
 
   const textSpan = document.createElement("span");
-  const cursorSpan = document.createElement("span");
-  cursorSpan.className = "cursor";
-  el.replaceChildren(textSpan, cursorSpan);
+  el.replaceChildren(textSpan);
 
   let i = 0;
   const timer = setInterval(() => {

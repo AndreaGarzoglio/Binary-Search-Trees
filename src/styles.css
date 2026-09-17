@@ -448,32 +448,6 @@ button.run.danger:hover {
   color: #ff8a8a;
 }
 
-/* ── Terminal cursor ── */
-.cursor {
-  display: inline-block;
-  width: 8px;
-  height: 1em;
-  margin-left: 2px;
-  background: var(--violet);
-  vertical-align: -2px;
-  animation: cursor-blink 1s steps(1) infinite;
-}
-
-.log-line.error .cursor {
-  background: var(--danger);
-}
-
-@keyframes cursor-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
 /* ── Log (terminal scrollback): one scrolling row, newest on the left ── */
 .log {
   flex-shrink: 0;
@@ -564,12 +538,6 @@ button.run.danger:hover {
   .cmd-row .fields {
     flex: 1 1 100%;
     order: 3;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cursor {
-    animation: none;
   }
 }
 
