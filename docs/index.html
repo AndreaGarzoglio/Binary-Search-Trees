@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary Search Tree</title>
+    <script defer src="main.497cf7e182adc05d1cf3.js"></script>
+  </head>
+
+  <body>
+    <main class="terminal">
+      <div class="titlebar">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="path">Andrea Garzoglio: ~/binary-search-trees</span>
+      </div>
+
+      <div class="body">
+        <div class="intro">
+          <p class="line"><span class="prompt">$</span> node bst.js</p>
+          <div class="intro-head">
+            <h1>Binary Search Tree</h1>
+            <button class="how-btn" id="btn-how">how it works</button>
+          </div>
+          <p class="desc">
+            Insert, delete and query nodes — the diagram below redraws live as
+            you run each command.
+          </p>
+        </div>
+
+        <div class="tree-wrap">
+          <div id="tree-view" class="tree-view"></div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="panes">
+          <div class="pane">
+            <p class="pane-label">mutate</p>
+
+            <div class="cmd-row">
+              <label for="build-vals">build tree</label>
+              <div class="fields">
+                <input
+                  id="build-vals"
+                  type="text"
+                  placeholder="comma-separated numbers"
+                />
+              </div>
+              <button id="btn-build" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label for="insert-val">insert</label>
+              <div class="fields">
+                <input id="insert-val" type="number" placeholder="number" />
+              </div>
+              <button id="btn-insert" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label for="delete-val">delete</label>
+              <div class="fields">
+                <input id="delete-val" type="number" placeholder="number" />
+              </div>
+              <button id="btn-delete" class="run danger">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>rebalance</label>
+              <div class="fields"></div>
+              <button id="btn-rebalance" class="run">run</button>
+            </div>
+          </div>
+
+          <div class="pane-divider"></div>
+
+          <div class="pane">
+            <p class="pane-label">query</p>
+
+            <div class="cmd-row">
+              <label for="includes-val">includes</label>
+              <div class="fields">
+                <input id="includes-val" type="number" placeholder="number" />
+              </div>
+              <button id="btn-includes" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label for="height-val">height</label>
+              <div class="fields">
+                <input id="height-val" type="number" placeholder="number" />
+              </div>
+              <button id="btn-height" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label for="depth-val">depth</label>
+              <div class="fields">
+                <input id="depth-val" type="number" placeholder="number" />
+              </div>
+              <button id="btn-depth" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>is balanced</label>
+              <div class="fields"></div>
+              <button id="btn-balanced" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>level order</label>
+              <div class="fields"></div>
+              <button id="btn-level" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>in order</label>
+              <div class="fields"></div>
+              <button id="btn-inorder" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>pre order</label>
+              <div class="fields"></div>
+              <button id="btn-preorder" class="run">run</button>
+            </div>
+
+            <div class="cmd-row">
+              <label>post order</label>
+              <div class="fields"></div>
+              <button id="btn-postorder" class="run">run</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div id="log" class="log" aria-live="polite"></div>
+      </div>
+
+      <dialog id="how-modal" class="how-modal">
+        <div class="how-modal-header">
+          <span id="how-modal-title">How it works</span>
+          <button
+            class="how-modal-close"
+            id="how-modal-close"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <pre class="how-modal-code"><code id="how-modal-code"></code></pre>
+      </dialog>
+    </main>
+  </body>
+</html>
